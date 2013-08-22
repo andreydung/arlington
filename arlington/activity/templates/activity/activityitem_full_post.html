@@ -1,0 +1,17 @@
+{% load markup oembed_tags typogrify_tags %}
+
+
+<div class="list-item">
+    <h2><a href="{{ object.get_absolute_url }}">{{ object.title|typogrify }}</a></h2>
+
+{% filter typogrify %}
+{% filter markdown %}
+{% oembed %}
+
+{{ object.body|safe }}
+
+{% endoembed %}
+{% endfilter %}
+{% endfilter %}
+
+</div>

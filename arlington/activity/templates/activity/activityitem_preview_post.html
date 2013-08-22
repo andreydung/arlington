@@ -1,0 +1,42 @@
+{% load markup oembed_tags typogrify_tags %}
+
+
+<div class="list-item">
+
+<h2><a href="{{ object.get_absolute_url }}">{{ object.title|typogrify }}</a></h2>
+
+<p>
+
+{% if body.summary %}
+
+{% filter typogrify %}
+{% filter striptags %}
+{% filter markdown %}
+{% oembed %}
+{{ object.summary|safe }}
+{% endoembed %}
+{% endfilter %}
+{% endfilter %}
+{% endfilter %}
+
+{% else %}
+
+{% filter truncatewords:50 %}
+{% filter typogrify %}
+{% filter striptags %}
+{% filter markdown %}
+{% oembed %}
+{{ object.body|safe }}
+{% endoembed %}
+{% endfilter %}
+{% endfilter %}
+{% endfilter %}
+{% endfilter %}
+
+<a href="{{ object.get_absolute_url }}">read more</a>
+
+{% endif %}
+
+</p>
+
+</div>

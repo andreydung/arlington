@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+
+{% block title %}{% trans "Tags" %} &#8226; {% endblock %}
+
+
+{% block body_class %}{{ block.super }} tags{% endblock %}
+
+
+{% block content %}
+
+<h1>{% trans "Tags" %}</h1>
+
+{% endblock %}

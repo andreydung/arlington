@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+
+{% load staticfiles i18n %}
+{% load url from future %}
+
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}{% endblock %}{{ site.name }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="index, follow, noarchive">
+    <meta name="description" content="">
+    <meta name="apple-mobile-web-app-title" content="{{ site.name }}">
+
+    <link type="image/x-icon" rel="shortcut icon" href="{% static 'img/favicon.ico' %}">    
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{% static 'img/touch_icon-144x144.png' %}">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{% static 'img/touch_icon-114x114.png' %}">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{% static 'img/touch_icon-72x72.png' %}">
+    <link rel="apple-touch-icon-precomposed" href="{% static 'img/touch_icon-57x57.png' %}">
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="alternate" href="#" type="application/rss+xml" title="{{ site.name }}">
+
+    {% block extra_head %}
+    {% endblock %}
+
+    <!-- Powered by Django & Python ♥ http://djangoproject.com -->
+
+</head>
+<body class="{% block body_class %}{% endblock %}">
+
+<header>
+{% block header %}
+    <p><a href="{% url 'home' %}">{{ site.name }}</a></p>
+{% endblock %}
+</header>
+
+<nav>
+{% block nav %}
+    <ul>
+        <li><a href="{% url 'home' %}">{% trans "Home" %}</a></li>
+        <li><a href="{% url 'post_list' %}">{% trans "Blog" %}</a></li>
+        <li><a href="#">{% trans "Photos" %}</a></li>
+        <li><a href="{% url 'about' %}">{% trans "About" %}</a></li>
+    </ul>
+{% endblock %}
+</nav>
+
+<main>
+{% block content %}
+{% endblock %}
+</main>
+
+<footer>
+{% block footer %}
+    <p>&copy;&nbsp;{% now "Y" %}. <a href="{% url 'home' %}">{{ site.name }}</a></p>
+{% endblock %}
+</footer>
+
+<script src="{% static 'js/jquery-1.10.2.js' %}"></script>
+<script src="{% static 'js/jquery.fitvids.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
+
+{% if google_analytics_id %}
+<script>
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', '{{ google_analytics_id }}']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+</script>
+{% endif %}
+
+
+</body>
+</html>

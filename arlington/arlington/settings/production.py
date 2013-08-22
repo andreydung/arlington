@@ -1,0 +1,6 @@
+from .base import *
+
+DEBUG = False
+TEMPLATE_DEBUG = DEBUG
+
+GOOGLE_ANALYTICS_ID = 'UA-XXXXX-X'

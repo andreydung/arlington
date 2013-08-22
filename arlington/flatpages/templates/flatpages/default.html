@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% load markup oembed_tags typogrify_tags %}
+
+
+{% block title %}{{ flatpage.title|typogrify|striptags }} &#8226; {% endblock %}
+
+
+{% block body_class %}flatpage{% endblock %}
+
+
+{% block content %}
+
+<h1>{{ flatpage.title|typogrify }}</h1>
+
+{% filter typogrify %}
+{% filter markdown %}
+{% oembed %}
+
+{{ flatpage.content }}
+
+{% endoembed %}
+{% endfilter %}
+{% endfilter %}
+
+{% endblock %}

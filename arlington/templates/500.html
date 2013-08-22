@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% load i18n typogrify_tags %}
+
+
+{% block title %}Website error &#8226; {% endblock %}
+
+
+{% block body_class %}{{ block.super }} error error_500{% endblock %}
+
+
+{% block content %}
+
+    {% filter typogrify %}
+    {% blocktrans %}
+
+    <h1>Website error</h1>
+
+    <p>We're sorry, but the website is temporarily down.</p>
+    
+    {% endblocktrans %}
+    {% endfilter %}
+
+{% endblock %}

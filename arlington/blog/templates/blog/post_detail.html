@@ -1,0 +1,54 @@
+{% extends "blog/posts_base.html" %}
+
+
+{% load i18n markup oembed_tags typogrify_tags %}
+
+
+{% block title %}{{ object.title|typogrify|striptags }} &#8226; {% endblock %}
+
+
+{% block body_class %}{{ block.super }} post_detail{% endblock %}
+
+
+{% block content %}
+
+
+<h1>{{ object.title|typogrify }}</h1>
+
+<p><time pubdate="pubdate" datetime="{{ object.published|date:"c" }}"><span class="date">{{ object.published|date:"j M Y" }}</span> <span class="time">{{ object.published|date:"P" }}</span></time></p>
+
+{% filter typogrify %}
+{% filter markdown %}
+{% oembed %}
+
+{{ object.body|safe }}
+
+{% endoembed %}
+{% endfilter %}
+{% endfilter %}
+
+{% if object.tags.all %}
+<div class="tags">
+    <p>
+    {% for tag in object.tags.all %}
+        <a href="{{ tag.get_absolute_url }}">#{{ tag|lower }}</a>
+    {% endfor %}    
+    </p>    
+</div>
+{% endif %}
+
+
+{% if item.get_next_by_published or item.get_previous_by_published %}
+<ul>
+    {% if item.get_next_by_published and item.get_next_by_published.content_object.public %}
+        <li><a href="{{ item.get_next_by_published.get_absolute_url }}">&larr; {{ item.get_next_by_published.title }}</a></li>
+    {% endif %}
+
+    {% if item.get_previous_by_published and item.get_previous_by_published.content_object.public %}
+        <li><a href="{{ item.get_previous_by_published.get_absolute_url }}">{{ item.get_previous_by_published.title }} &rarr; </a></li>
+    {% endif %}
+</ul>
+{% endif %}
+
+
+{% endblock %}

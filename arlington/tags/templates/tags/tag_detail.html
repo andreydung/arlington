@@ -1,0 +1,38 @@
+{% extends "tags/tags_base.html" %}
+
+
+{% load i18n markup oembed_tags typogrify_tags %}
+
+
+{% block title %}{{ object.title|typogrify|striptags }} &#8226; {% endblock %}
+
+
+{% block extra_head %}
+    <link rel="alternate" href="#" type="application/rss+xml" title="{{ site.name }}: {{ object.title }}">
+{% endblock %}
+
+
+{% block body_class %}{{ block.super }} tag_detail{% endblock %}
+
+
+{% block content %}
+
+<p><a href="{% url 'tag_list' %}">{% trans "All tags" %}</a></p>
+
+<h1>{{ object.title|typogrify }}</h1>
+
+{% if item_list %}
+<div class="list">
+{% for item in item_list %}
+    {% if item.content_object.public %}
+
+    {{ item.render_preview }}
+
+    {% endif %}
+{% endfor %}
+</div>
+{% endif %}
+
+<p><a href="#">#{{ object.title|lower }} {% trans " feed" %}</a></p>
+
+{% endblock %}

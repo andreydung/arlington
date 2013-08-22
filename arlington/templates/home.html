@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% load typogrify_tags i18n %}
+
+
+{% block body_class %}{{ block.super }} home{% endblock %}
+
+
+{% block content %}
+
+    {% filter typogrify %}
+
+    <h1>{{ site.name }}</h1>
+
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In a cursus mauris. Cras dolor felis, scelerisque quis posuere sit amet, semper at mauris. Praesent et enim ac orci luctus condimentum. Praesent ultrices placerat ipsum ut pulvinar.</p>
+
+    {% endfilter %}
+
+    <h2>{% trans "Activity" %}</h2>
+
+    {% if activityitem_list %}
+    <div class="list">
+    {% for item in activityitem_list %}
+        {% if item.content_object.public %}
+
+        {{ item.render_preview }}
+
+        {% endif %}
+    {% endfor %}
+    </div>
+    {% endif %}
+
+{% endblock %}
