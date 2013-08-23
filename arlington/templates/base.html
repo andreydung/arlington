@@ -30,31 +30,34 @@
 <body class="{% block body_class %}{% endblock %}">
 
 <header>
-{% block header %}
+    {% block header %}
     <p><a href="{% url 'home' %}">{{ site.name }}</a></p>
-{% endblock %}
+    {% endblock %}
+    <div class="visuallyhidden access">
+        <p><a href="#content">Skip to content.</a></p>
+    </div>
 </header>
 
 <nav>
-{% block nav %}
+    {% block nav %}
     <ul>
         <li><a href="{% url 'home' %}">{% trans "Home" %}</a></li>
         <li><a href="{% url 'post_list' %}">{% trans "Blog" %}</a></li>
         <li><a href="#">{% trans "Photos" %}</a></li>
         <li><a href="{% url 'about' %}">{% trans "About" %}</a></li>
     </ul>
-{% endblock %}
+    {% endblock %}
 </nav>
 
-<main>
-{% block content %}
-{% endblock %}
+<main id="content">
+    {% block content %}
+    {% endblock %}
 </main>
 
 <footer>
-{% block footer %}
+    {% block footer %}
     <p>&copy;&nbsp;{% now "Y" %}. <a href="{% url 'home' %}">{{ site.name }}</a></p>
-{% endblock %}
+    {% endblock %}
 </footer>
 
 <script src="{% static 'js/jquery-1.10.2.js' %}"></script>
